@@ -1,0 +1,26 @@
+### Commented entries have reasonable defaults.
+### Uncomment to edit them.
+Section: misc
+Priority: optional
+Homepage: http://nebc.nerc.ac.uk/tools/bio-linux
+Standards-Version: 3.6.2
+
+Package: bio-linux
+Version: 6.0
+# Maintainer: Your Name <yourname@example.com>
+# Pre-Depends: <comma-separated list of packages>
+
+Depends: bio-linux-zsh, bio-linux-base-directories, bio-linux-paml, bio-linux-dotter, bio-linux-mountapp, bio-linux-ape,bio-linux-blixem, bio-linux-fasta, bio-linux-oligoarrayaux,bio-linux-estscan, bio-linux-migrate, bio-linux-nrdb, bio-linux-grid,bio-linux-transterm-hp, bio-linux-happy, bio-linux-qtlcart, bio-linux-cap3, bio-linux-grid-certs, bio-linux-blast+,bio-linux-clcsequenceviewer, bio-linux-mothur, bio-linux-pftools,bio-linux-recombine, bio-linux-mrbayes-multi, bio-linux-tetra,bio-linux-trnascan, bio-linux-arb, bio-linux-mspcrunch, bio-linux-lucy, bio-linux-netblast, bio-linux-seaview, bio-linux-glimmer3 |bio-linux-glimmer, bio-linux-assembly-conversion-tools,bio-linux-wise2, bio-linux-documentation, bio-linux-ocount,bio-linux-fluctuate, bio-linux-peptidemapper, bio-linux-coalesce,bio-linux-dotur, bio-linux-prank, bio-linux-dust, bio-linux-cd-hit, bio-linux-transterm, bio-linux-mira, bio-linux-staden,bio-linux-omegamap, bio-linux-rbs-finder, bio-linux-mview,bio-linux-cytoscape, bio-linux-prot4est, bio-linux-python-cogent,bio-linux-mrbayes, bio-linux-samtools, bio-linux-clustal, bio-linux-mesquite, bio-linux-themes, bio-linux-msatfinder,bio-linux-handlebar, bio-linux-sampledata, bio-linux-chimeraslayer,bio-linux-das-prep, bio-linux-dialign, bio-linux-tree-puzzle,bio-linux-xcut, bio-linux-backups, bio-linux-readseq,bio-linux-ncbi-tools-x11, bio-linux-partigene, bio-linux-rasmol,bio-linux-big-blast, bio-linux-priam, bio-linux-yamap,bio-linux-tutorials, bio-linux-jprofilegrid, bio-linux-phylip,bio-linux-muscle, bio-linux-blast, bio-linux-rdp-classifier,bio-linux-trace2dbest, bio-linux-artemis, bio-linux-treeview,bio-linux-genquery, bio-linux-mira-3rd-party, bio-linux-act,bio-linux-usb-maker, bio-linux-emboss-kmenus, bio-linux-themes-v5,bio-linux-pfaat, bio-linux-njplot, bio-linux-pedro, bio-linux-mummer,bio-linux-phyml, bio-linux-squint, bio-linux-oligoarray,bio-linux-maxd, bio-linux-emboss, bio-linux-mcl, bio-linux-keyring,bio-linux-dendroscope, bio-linux-denoiser,bio-linux-envbase-for-pedro, bio-linux-forester, bio-linux-taverna,bio-linux-exchanger, bio-linux-taxinspector, bio-linux-hmmer ,bio-linux-fastDNAml, bio-linux-primer3, bio-linux-qiime,bio-linux-bldp-files, bio-linux-jalview, bio-linux-t-coffee,bio-linux-stars, bio-linux-sequin, bio-linux-cdbfasta,bio-linux-splitstree, bio-linux-biojava
+# Recommends: <comma-separated list of packages>
+# Suggests: <comma-separated list of packages>
+# Provides: <comma-separated list of packages>
+# Replaces: <comma-separated list of packages>
+# Architecture: all
+# Copyright: <copyright file; defaults to GPL2>
+# Changelog: <changelog file; defaults to a generic changelog>
+# Readme: <README.Debian file; defaults to a generic one>
+# Extra-Files: <comma-separated list of additional files for the doc directory>
+# Files: <pair of space-separated paths; First is file to include, second is destination>
+#  <more pairs, if there's more than one file to include. Notice the starting space>
+Description: Bioinformatics programs.
+ Bio-Linux provides more than 500 bioinformatics programs on an Ubuntu Linux 10.04 base. There is a graphical menu for bioinformatics programs, as well as easy access to the Bio-Linux bioinformatics documentation system and sample data useful for testing programs. You can also install Bio-Linux packages to handle new generation sequence data types

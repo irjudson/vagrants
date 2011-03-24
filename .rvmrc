@@ -1,0 +1,7 @@
+rvm_install_on_use_flag=1
+
+rvm 1.9.2 
+
+if ! command -v bundle ; then
+   gem install bundler
+fi
