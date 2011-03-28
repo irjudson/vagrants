@@ -1,2 +1,5 @@
 .vagrant
 tmp/
+*.box
+etc
+cookbooks/opscode
