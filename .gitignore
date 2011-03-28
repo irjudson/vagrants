@@ -2,4 +2,4 @@
 tmp/
 *.box
 etc
-cookbooks/opscode
+*/*~
