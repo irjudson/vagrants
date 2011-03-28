@@ -1,0 +1,375 @@
+import os , os.path
+# this a python module the syntax used is the python syntax
+
+
+############################################
+#                                          #
+#            Mandatory values              #
+#                                          #
+############################################
+
+
+# the root url of mobyle 
+ROOT_URL = "http://<%=node[:fqdn]%>"
+
+#base project url for mobyle cgis = ROOT_URL + CGI_PREFIX
+CGI_PREFIX = 'cgi-bin/mobyle'
+
+#base project url for mobyle htdocs = ROOT_URL + HTDOCS_PREFIX
+HTDOCS_PREFIX = 'mobyle'
+
+#########
+#       #
+# mails #
+#       #
+#########
+
+#a list of email addresses who will received messages when problems occur
+MAINTAINER = [ "root@<%=node[:fqdn]%>" ]
+
+#the email address where the users could have help on this Mobyle portal
+HELP="root@<%=node[:fqdn]%>"
+
+# local mailhost
+MAILHOST= "<%=node[:fqdn]%>"
+
+##################
+#                #
+# queuing system #
+#                # 
+##################
+
+# the allowed values are : SGE , Sys is plan to be supported PBS .
+# mandatory
+BATCH = "Sys"
+
+#######################
+#                     #
+#       logging       #
+#                     #
+#######################
+
+#the directory were will stored the log files
+LOGDIR = '/tmp'
+
+
+####################################################
+#                                                  #
+#    programs needed by the sequences format       #
+#          detection and conversion                # 
+#                                                  #
+####################################################
+
+# the 2 sequences conveter supported by Mobyle are
+# squizz and the java version of readseq
+# squizz is HIGHLY recommanded
+
+SEQCONVERTER= {
+    'SQUIZZ': '/usr/local/bin/squizz'
+    #'READSEQ': '/usr/local/bin/jreadseq' 
+    }
+
+
+######################################################################## 
+######################################################################## 
+##                                                                    ##
+##                           Optionals Values                         ##
+##                                                                    ##
+########################################################################
+########################################################################
+
+#########
+#       #
+# Debug #
+#       #
+#########
+
+#used in production
+# 0    - the command line is build
+#      - the build log is NOT fill
+#      - the job is executed
+
+#to test a xml ( python syntax in code , precond ... )
+# 1    - the command line is build 
+#      - the build log is NOT fill
+#      - the job is NOT executed
+
+#to know what's wrong in the xml I wrote.
+# 2    - the command line is build
+#      - the build log is fill
+#      - the job is NOT executed
+
+#to test the xml and the job execution and the results retrieving
+# 3    - the command line is build
+#      - the build log is fill
+#      - the job is executed
+
+DEBUG = 3
+
+#to set a different debug level for a particular service
+#PARTICULAR_DEBUG = { 'serviceName' : 3 }
+
+
+###############
+#             #
+# Directories #
+#             #
+###############
+
+## were are the binary corresponding to the services
+## a list of string
+## each element must be a valid path
+## the element order is kept to build the final PATH ( the binary path is add before the canonical PATH )
+
+BINARY_PATH = ["/usr/local/bin"]
+
+
+DATABANKS_CONFIG = {
+    'wgs':{
+     'dataType' : 'Sequence', 
+     'bioTypes' : ['Nucleic'],    
+     'label'    : 'Genbank - Whole Genome Shotgun',
+     'command': ['golden', '%(db)s:%(id)s']
+    }
+}
+
+#    'pdb':{
+#     'dataType':'3DStructure', 
+#     'bioTypes':['Protein'], 
+#     'label': 'Protein Data Bank', 
+#     'command': [ "/path/to/PDBGet.py", "%(id)s" ]
+#    }
+
+######################
+#                    #
+#   Authentication   #
+#                    #
+######################
+
+
+## to make email optional for all programs, set this to True
+## default value = True
+
+#OPT_EMAIL = False
+
+## to have a more control on the mandatory email
+## it able to have the general option but
+## it could be set to another value for particular service
+## example :
+## OPT_EMAIL could be set at False ( the email is mandatory )
+## but set a True for some very short services.
+
+#PARTICULAR_OPT_EMAIL = {'program_url' : True }
+
+## anonymous session there is 3 available values 
+##  'no'      : the anonymous sessions are not allowed
+##  'yes'     : the anonymous sessions are allowed, without any verification 
+##  'captcha' : the anonymous sessions are allowed, but with a captcha challenge ( default )
+
+#ANONYMOUS_SESSION = "captcha"
+
+
+## authenticated session there is 3 available values
+##  'no'    : the authenticated session are not allowed.
+##  'yes'   : the authenticated session are allowed and activated without any restriction.
+##  'email' : the authenticated session are allowed but an email confirmation is needed to activate it (default).
+
+#AUTHENTICATED_SESSION = "email"
+
+##############
+#            #
+#    misc    #
+#            #
+##############
+
+## the time to consider that a job is long ( in sec default = 60 , min = 10 )
+#TIMEOUT = 60
+
+## refresh frequency for user data in the web portal, in seconds
+## default: 240
+
+#REFRESH_FREQUENCY = 240
+
+## max size for any file (2 Go )
+#FILELIMIT = 2147483648
+
+## max size for a session in bytes ( default = 50Mo = 52428800 )
+#SESSIONLIMIT = 52428800 
+
+##max size to preview the results 
+##if the results size exceed this limit the results appear as a link ( default value = 1048576 = 1Mib )
+#PREVIEW_DATA_LIMIT = 1048576
+
+##########
+#        #
+#  Mail  #
+#        #
+##########
+
+##from: sender email address ( default = HELP )
+#SENDER = "myname-noreply@mydomain.fr"
+
+##set this True if you don't want results to be sent by email.
+##This does not make email optional
+#DONT_EMAIL_RESULTS = False
+
+## max size for results by email ( in bytes default 2 Mib )
+#MAXMAILSIZE = 2097152
+
+## how long should results be available on the server ( in days default = 10)?
+#RESULT_REMAIN = 10
+
+
+## if you want to resolve the domain name of the user email
+## and if it has a mail exchanger field
+## (to avoid fake user email address)
+## by default DNS_RESOLVER = False
+## if DNS_RESOLVER = True dnspython must be installed
+
+DNS_RESOLVER = False
+
+
+###################
+#                 # 
+# queuing system  #
+#                 #
+###################
+
+##if you want to use another "queuing system" for a special service
+##for all program I use SGE but for toppred which is fast I preferd to 
+##launch it in Sys
+##PARTICULAR_BATCH = { 'toppred' : 'Sys' ,
+##                     'cons'    : 'Sys' ,
+##                      }
+
+#PARTICULAR_BATCH = {}
+
+## the name of the default queue
+#DEFAULT_Q = 'local'
+
+## the name of a particular queue for a service
+##PARTICULAR_Q = {'golden' : 'short' }
+
+#PARTICULAR_Q = {}
+
+#Q_PROPERTIES={}
+   
+##########################################################################
+#                                                                        #
+#  SGE Configuration (only if you set SGE in BATCH or PARTICULAR_BATCH)  #
+#                                                                        #
+##########################################################################
+
+
+#SGE_ROOT = "/local/gensoft/adm/sge" 
+#SGE_CELL = "gensoft"
+
+
+################
+#              #
+#   logging    #
+#              #
+################
+
+## to monitored the elapsed time per job ( default = False )
+#ACCOUNTING = True
+
+#######################
+#                     #
+# disabling services  #
+#                     #
+#######################
+
+## some times you need to disable the portal for maintaining operation etc...
+## if DISABLE_ALL is True no new job could be submit, but the running job keep running
+## you can disable only one programs by append it in  DISABLED_SERVICES 
+## to re-enable services just toggle DISABLE_ALL to False or remove it from 
+## the DISABLED_SERVICES list 
+
+#DISABLE_ALL = False
+
+##use the url of the programs you want disable
+##DISABLED_SERVICES = [ 'ROOT_URL + HTDOCS_PREFIX + myprograms.xml' ] 
+
+#DISABLED_SERVICES = []
+
+
+################################
+#                              #
+# restriction services access  #
+#                              #
+################################
+
+## by default all the programs available are usable by all         
+## users who can access your web server. but sometimes,due to      
+## some license restrictions etc... , you need to restrict the     
+## accessibility of some programs to some users.                    
+## to do that use the AUTHORIZED_SERVICES                          
+## The filtering is based on the ip of the requester.              
+## AUTHORIZED_SERVICES is a dictionary with the service names of   
+## programs to restrict as keys and the list of ip which can          
+## access these programs as values                                 
+##                                                                 
+## AUTHORIZED_SERVICES = { serviceURL :[ ip , ip mask ] }         
+##
+## the ip address which can use the service
+##
+## AUTHORIZED_SERVICES = 'http://myMobyle.mydomain.fr/data/programs/toppred.xml' : [ '125.234.60.18' , # only the machine with this ip could access to toppred
+##                                                                                   '125.234.60.*'  , # all the machines in subnet could access to toppred
+##                                                                                   '125.234.*.15   , # all the machine 
+##                                                                                 ] 
+##
+## if there is no entry for a service it's mean that
+## every body can access to this service
+
+
+#AUTHORIZED_SERVICES = {}
+
+
+################################
+#                              #
+#     Services Management      #
+#                              #
+################################
+
+##################################################################################
+#                                                                                #
+# Local program publishing section                                               #
+#                                                                                #
+# This configuration file is used to deploy the xml programs descriptions on     # 
+# the Mobyle web part from the Mobyle/Local/Programs and Mobyle/Programs.        # 
+# all the xml from Local/Programs are deployed                                   #
+# the xml from Programs are filtered following the rules below                   #  
+# (for more explanations see INSTALL notes and Tools/README)                     #
+#                                                                                #
+# (if this file doesn't exist all the programs from Programs will be published)  # 
+#                                                                                #
+##################################################################################
+
+##by default ORDER      = ['include' , 'exclude' ]
+#LOCAL_DEPLOY_ORDER   = [ 'include' , 'exclude' ]
+
+#LOCAL_DEPLOY_INCLUDE = [ '*' ]
+
+#LOCAL_DEPLOY_EXCLUDE = []
+
+
+######################
+#                    #
+#    Grid aspects    #
+#                    #
+######################
+
+#PORTALS={'portal1': {
+#            'url': 'http://otherdomain.fr:port/cgi-bin/MobylePortal',
+#            'help' : 'help@otherdomain.fr',
+#            'repository': 'http://otherdomain.fr:port/MobyleData/programs',
+#            'programs': ['clustalw-multialign'],
+#            'jobsBase': 'http://otherdomain.fr:port/MobyleData/jobs'            
+#            }
+#        }
+PORTALS={}
+
+#EXPORTED_SERVICES = [ 'golden', 'abiview' ]
+
+
