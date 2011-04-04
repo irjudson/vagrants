@@ -1,9 +1,10 @@
 Vagrant::Config.run do |config|
   config.vm.define :mobyle do |mobyle|		   
-    mobyle.vm.box = "lucid64"
+    # vagrant box add mobyle <url to package.box>
+    mobyle.vm.box = "mobyle"
     mobyle.vm.box_url = "http://files.vagrantup.com/lucid64.box"
     mobyle.vm.forward_port "http", 80, 8080
-    mobyle.vm.host_name = "mobyle.cns.montana.edu"
+    mobyle.vm.host_name = "mobyle.localdomain"
 
     mobyle.vm.customize do |vm|
       vm.memory_size = 1024
@@ -32,7 +33,8 @@ Vagrant::Config.run do |config|
     end
 
     ldapclient.vm.provision :chef_solo do |chef|
-      chef.json.merge!({ 
+
+    chef.json.merge!({ 
                          :openldap => { :basedn => 'dc=montana,dc=edu', 
                            :server => 'ds.montana.edu',
                            :binddn => 'cn=acg,dc=montana,dc=edu' 
